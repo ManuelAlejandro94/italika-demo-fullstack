@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es-MX" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xml:lang="es-MX" xmlns:layout="http://www.thymeleaf.org" layout:decorate="/fragments/main_layout">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container" layout:fragment="container">
+    <div id="container" class="col-md-12">
+        <h2>Todos los pedidos</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>FECHA</th>
+                    <th>IP</th>
+                    <th>HAWA</th>
+                    <th>SUCURSAL</th>
+                    <th>CLIENTE</th>
+                    <th>VENDEDOR</th>
+                    <th>TOTAL</th>
+                </tr>
+                </thead>
+                <tr th:each="registroModel : ${registroModel}">
+                    <td th:text="${registroModel.id}"></td>
+                    <td th:text="${registroModel.fecha}"></td>
+                    <td th:text="${registroModel.direccionIP}"></td>
+                    <td th:text="${registroModel.hawa}"></td>
+                    <td th:text="${registroModel.sucursal}"></td>
+                    <td th:text="${registroModel.cliente}"></td>
+                    <td th:text="${registroModel.vendedor}"></td>
+                    <td>$ <span th:text="${registroModel.total}"></span>.00</td>
+                    <td>
+                        <form th:action="@{/web/display}" th:object="${registroDetailsViewModel}" method="post">
+                            <input name="Token" id="Token" type="hidden" th:value="${token}" />
+                            <input name="id" id="id" type="hidden" th:value="${registroModel.id}" />
+                            <input name="Fecha" id="Fecha" type="hidden" th:value="${registroModel.fecha}" />
+                            <input name="DireccionIP" id="DireccionIP" type="hidden" th:value="${registroModel.direccionIP}" />
+                            <input name="Hawa" id="Hawa" type="hidden" th:value="${registroModel.hawa}" />
+                            <input name="Sucursal" id="Sucursal" type="hidden" th:value="${registroModel.sucursal}" />
+                            <input name="Cliente" id="Cliente" type="hidden" th:value="${registroModel.cliente}" />
+                            <input name="Vendedor" id="Vendedor" type="hidden" th:value="${registroModel.vendedor}" />
+                            <input name="Total" id="Total" type="hidden" th:value="${registroModel.total}" />
+                            <button type="submit">Detalles</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

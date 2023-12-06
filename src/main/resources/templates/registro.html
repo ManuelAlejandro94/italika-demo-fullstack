@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es-MX" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xml:lang="es-MX" xmlns:layout="http://www.thymeleaf.org" layout:decorate="/fragments/main_layout">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container" layout:fragment="container">
+    <div id="container" class="col-md-12">
+        <h2>Resumen</h2>
+        <h3 th:text="${productoModel.modelo}"></h3>
+        <p><span th:text="${productoModel.hawa}"></span></p>
+        <p><span th:text="${productoModel.precio}"></span></p>
+        <p>Cliente: <span th:text="${clientesModel.nombres}"></span> <span th:text="${clientesModel.apellidos}"></span></p>
+        <p>Sucursal asignada: <span th:text="${sucursalModel.sucursal}"></span></p>
+        <p>Vendedor asignado: <span th:text="${vendedorModel.nombre}"></span></p>
+        <form th:action="@{/web/registro}" th:object="${lastRegistroViewModel}" method="post">
+            <input name="Token" id="Token" type="hidden" th:value="${viewModel.token}" />
+            <input name="IdHawa" id="IdHawa" type="hidden" th:value="${productoModel.id}" />
+            <input name="Ip" id="Ip" type="hidden" th:value="${viewModel.ip}" />
+            <input name="Fecha" id="Fecha" type="hidden" th:value="${viewModel.fecha}" />
+            <input name="Sucursal" id="Sucursal" type="hidden" th:value="${sucursalModel.id}" />
+            <input name="Vendedor" id="Vendedor" type="hidden" th:value="${vendedorModel.id}" />
+            <input name="Cliente" id="Cliente" type="hidden" th:value="${clientesModel.id}" />
+            <input name="Total" id="Total" type="hidden" th:value="${productoModel.precio}" />
+            <button type="submit">Comprar</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

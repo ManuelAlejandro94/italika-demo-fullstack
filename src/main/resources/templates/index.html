@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es-MX" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xml:lang="es-MX" xmlns:layout="http://www.thymeleaf.org" layout:decorate="/fragments/main_layout">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container" layout:fragment="container">
+    <div id="container" class="col-md-12">
+        <h2>INICIO</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>HAWA</th>
+                    <th>MODELO</th>
+                    <th>PRECIO</th>
+                </tr>
+                </thead>
+                <tr th:each="productos : ${productos}">
+                    <td th:text="${productos.id}"></td>
+                    <td th:text="${productos.hawa}"></td>
+                    <td th:text="${productos.modelo}"></td>
+                    <td>$ <span th:text="${productos.precio}"></span>.00</td>
+                    <td>
+                        <form th:action="@{/web}" th:object="${indexViewModel}" method="post">
+                            <input name="Token" id="Token" type="hidden" th:value="${token}" />
+                            <input name="IdProducto" id="IdProducto" type="hidden" th:value="${productos.id}" />
+                            <button type="submit">Detalles</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
